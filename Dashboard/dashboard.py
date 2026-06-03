@@ -3,15 +3,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import os
 
 sns.set_theme(style="whitegrid")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # LOAD DATA
 @st.cache_data
 def load_data():
-    df1 = pd.read_csv("air_quality_part1.csv")
-    df2 = pd.read_csv("air_quality_part2.csv")
-    df3 = pd.read_csv("air_quality_part3.csv")
+    df1 = pd.read_csv(os.path.join(BASE_DIR, "air_quality_part1.csv"))
+    df2 = pd.read_csv(os.path.join(BASE_DIR, "air_quality_part2.csv"))
+    df3 = pd.read_csv(os.path.join(BASE_DIR, "air_quality_part3.csv"))
     df = pd.concat([df1, df2, df3], ignore_index=True)
     # Pastikan kolom datetime ada & bertipe datetime
     if "datetime" not in df.columns:
